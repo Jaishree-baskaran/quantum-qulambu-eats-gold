@@ -17,7 +17,7 @@ const Index: React.FC = () => {
       <header className="p-4 pt-8 glass-morphism sticky top-0 z-10">
         <div className="flex items-center justify-between mb-4">
           <div className="text-2xl font-bold text-gradient">Quantum Qulambu</div>
-          <Button variant="ghost" size="icon" className="relative">
+          <Button variant="ghost" size="icon" className="relative active:scale-95">
             <ShoppingCart className="h-6 w-6" />
             <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
               3
@@ -27,13 +27,13 @@ const Index: React.FC = () => {
         <div className="relative">
           <Input
             type="text"
-            placeholder="Search your cravings..."
+            placeholder="खोजें अपने पसंदीदा व्यंजन..."
             className="w-full bg-secondary/50 backdrop-blur-sm pl-10 pr-10 py-6 rounded-xl border-accent/20"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-          <Button variant="ghost" size="icon" className="absolute right-2 top-1/2 transform -translate-y-1/2">
+          <Button variant="ghost" size="icon" className="absolute right-2 top-1/2 transform -translate-y-1/2 active:scale-95">
             <Filter className="text-accent h-5 w-5" />
           </Button>
         </div>
@@ -43,8 +43,8 @@ const Index: React.FC = () => {
         {/* Categories Section */}
         <section className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Categories</h2>
-            <Button variant="link" className="text-accent">View All</Button>
+            <h2 className="text-xl font-semibold">श्रेणियां</h2>
+            <Button variant="link" className="text-accent active:scale-95 transition">देखें सभी</Button>
           </div>
           <FoodCategoryList />
         </section>
@@ -52,8 +52,8 @@ const Index: React.FC = () => {
         {/* Today's Offers */}
         <section className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Today's Offers</h2>
-            <Button variant="link" className="text-accent">View All</Button>
+            <h2 className="text-xl font-semibold">आज के ऑफर</h2>
+            <Button variant="link" className="text-accent active:scale-95 transition">देखें सभी</Button>
           </div>
           <TodaysOffers />
         </section>
@@ -61,13 +61,13 @@ const Index: React.FC = () => {
         {/* Popular Items */}
         <section className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">Popular Items</h2>
-            <Button variant="link" className="text-accent">View All</Button>
+            <h2 className="text-xl font-semibold">लोकप्रिय व्यंजन</h2>
+            <Button variant="link" className="text-accent active:scale-95 transition">देखें सभी</Button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FoodItemCard 
               id="1"
-              name="Masala Dosa"
+              name="मसाला डोसा"
               image="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
               price={8.99}
               rating={4.8}
@@ -75,7 +75,7 @@ const Index: React.FC = () => {
             />
             <FoodItemCard 
               id="2"
-              name="Chicken Biryani"
+              name="चिकन बिरयानी"
               image="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
               price={12.99}
               rating={4.7}
@@ -83,7 +83,7 @@ const Index: React.FC = () => {
             />
             <FoodItemCard 
               id="3"
-              name="Idli Sambar"
+              name="इडली सांभर"
               image="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
               price={6.99}
               rating={4.5}
@@ -91,7 +91,7 @@ const Index: React.FC = () => {
             />
             <FoodItemCard 
               id="4"
-              name="Fish Curry"
+              name="फिश करी"
               image="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
               price={14.99}
               rating={4.6}
@@ -103,21 +103,21 @@ const Index: React.FC = () => {
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 glass-morphism p-2 flex justify-around items-center">
-        <Button variant="ghost" size="icon" className="flex flex-col items-center text-accent">
+        <Button variant="ghost" size="icon" className="flex flex-col items-center text-accent active:scale-95 transition">
           <Home className="h-6 w-6 mb-1" />
-          <span className="text-xs">Home</span>
+          <span className="text-xs">होम</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col items-center">
+        <Button variant="ghost" size="icon" className="flex flex-col items-center active:scale-95 transition">
           <Search className="h-6 w-6 mb-1" />
-          <span className="text-xs">Search</span>
+          <span className="text-xs">खोज</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col items-center">
+        <Button variant="ghost" size="icon" className="flex flex-col items-center active:scale-95 transition">
           <Menu className="h-6 w-6 mb-1" />
-          <span className="text-xs">Menu</span>
+          <span className="text-xs">मेनू</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col items-center">
+        <Button variant="ghost" size="icon" className="flex flex-col items-center active:scale-95 transition">
           <User className="h-6 w-6 mb-1" />
-          <span className="text-xs">Profile</span>
+          <span className="text-xs">प्रोफाइल</span>
         </Button>
       </nav>
     </div>

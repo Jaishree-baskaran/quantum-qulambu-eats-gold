@@ -7,22 +7,22 @@ import { ChevronRight } from "lucide-react";
 const offers = [
   {
     id: 1,
-    title: "Buy 2 Get 1 Free",
-    description: "On selected South Indian dishes",
-    image: "https://images.unsplash.com/photo-1689879458023-459d70d2c0a7",
+    title: "Buy 1 Get 1 Free",
+    description: "On all Dosa varieties this weekend",
+    image: "https://images.unsplash.com/photo-1667030489429-c5fb604556d0",
     bgColor: "from-purple-600 to-blue-700",
   },
   {
     id: 2,
-    title: "20% OFF",
-    description: "On weekend family platters",
+    title: "40% OFF",
+    description: "On family thali platters",
     image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0",
     bgColor: "from-orange-500 to-red-600",
   },
   {
     id: 3,
     title: "Free Delivery",
-    description: "On orders above $25",
+    description: "On orders above ₹500",
     image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641",
     bgColor: "from-green-500 to-emerald-700",
   },
@@ -52,7 +52,7 @@ const TodaysOffers: React.FC = () => {
             </div>
           </div>
           <CardContent className="flex justify-end p-2">
-            <Button variant="ghost" className="text-accent hover:text-accent/80 px-2" size="sm">
+            <Button variant="ghost" className="text-accent hover:text-accent/80 px-2 btn-active" size="sm">
               <span className="mr-1">Redeem Now</span>
               <ChevronRight className="h-4 w-4" />
             </Button>

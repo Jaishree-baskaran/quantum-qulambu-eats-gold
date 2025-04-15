@@ -33,7 +33,7 @@ const FoodItemCard: React.FC<FoodItemCardProps> = ({
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-2 right-2 bg-black/30 backdrop-blur-sm rounded-full hover:bg-black/50"
+          className="absolute top-2 right-2 bg-black/30 backdrop-blur-sm rounded-full hover:bg-black/50 active:bg-black/70"
         >
           <Heart className="h-5 w-5 text-white" />
         </Button>
@@ -56,10 +56,10 @@ const FoodItemCard: React.FC<FoodItemCardProps> = ({
             </div>
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-accent font-semibold">${price.toFixed(2)}</span>
+            <span className="text-accent font-semibold">₹{Math.round(price * 80)}</span>
             <Button
               size="icon"
-              className="h-8 w-8 rounded-full bg-accent text-background hover:bg-accent/80 mt-1"
+              className="h-8 w-8 rounded-full bg-accent text-background hover:bg-accent/80 active:bg-accent/60 mt-1"
             >
               <Plus className="h-4 w-4" />
             </Button>
