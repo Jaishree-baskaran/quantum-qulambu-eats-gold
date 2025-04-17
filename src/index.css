@@ -115,7 +115,33 @@
     @apply translate-y-4;
   }
 
-  :is(.fade-in, .slide-in-from-left, .slide-in-from-right, .slide-in-from-bottom)[data-animate="true"] {
+  .slide-in-from-top {
+    @apply -translate-y-4;
+  }
+
+  :is(.fade-in, .slide-in-from-left, .slide-in-from-right, .slide-in-from-bottom, .slide-in-from-top)[data-animate="true"] {
     @apply opacity-100 translate-x-0 translate-y-0;
+  }
+  
+  .pulse {
+    @apply animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite];
+  }
+  
+  .bounce {
+    @apply animate-[bounce_1s_infinite];
+  }
+  
+  .spin-slow {
+    @apply animate-[spin_3s_linear_infinite];
+  }
+  
+  .shimmer {
+    @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent;
+  }
+  
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
   }
 }

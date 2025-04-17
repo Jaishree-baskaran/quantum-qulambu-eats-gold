@@ -1,34 +1,78 @@
 
-import React, { useState } from "react";
-import { Search, ShoppingCart, Filter, Home, Menu, User } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Search, ShoppingCart, Filter, Home, Menu, User, Clock, Heart } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import FoodCategoryList from "@/components/FoodCategoryList";
 import FoodItemCard from "@/components/FoodItemCard";
 import TodaysOffers from "@/components/TodaysOffers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { motion } from "@/components/ui/motion";
 
 const Index: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [cartCount, setCartCount] = useState(3);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  
+  useEffect(() => {
+    // Animate elements after page loads
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Demo function to handle adding items to cart
+  const handleAddToCart = () => {
+    setCartCount(prev => prev + 1);
+  };
+  
+  // Function to handle category selection
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category === selectedCategory ? null : category);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground pb-20">
       <header className="p-4 pt-8 glass-morphism sticky top-0 z-10">
         <div className="flex items-center justify-between mb-4">
-          <div className="text-2xl font-bold text-gradient">Quantum Qulambu</div>
+          <motion
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl font-bold text-gradient relative"
+          >
+            Quantum Qulambu
+            <span className="absolute -top-2 -right-4">
+              <Badge variant="outline" className="bg-accent/10 text-accent text-xs">Premium</Badge>
+            </span>
+          </motion>
+          
           <Button 
             variant="ghost" 
             size="icon" 
-            className="relative hover:rotate-12 transition-transform"
+            className="relative hover:rotate-12 transition-transform duration-300"
             onClick={() => console.log("Cart clicked")}
           >
             <ShoppingCart className="h-6 w-6" />
-            <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center animate-in fade-in duration-300">
+            <motion.span 
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 500, 
+                damping: 15 
+              }}
+              className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center"
+            >
               {cartCount}
-            </span>
+            </motion.span>
           </Button>
         </div>
+        
         <div className="relative">
           <Input
             type="text"
@@ -50,17 +94,39 @@ const Index: React.FC = () => {
       </header>
 
       <main className="px-4 py-6 space-y-8">
+        {/* Quick Actions */}
+        <section className={`transition-all duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}>
+          <div className="grid grid-cols-4 gap-3">
+            <Button variant="outline" className="flex flex-col items-center gap-1 h-auto py-3 glass-morphism border-accent/10">
+              <Clock className="text-accent h-5 w-5" />
+              <span className="text-xs">Fast Delivery</span>
+            </Button>
+            <Button variant="outline" className="flex flex-col items-center gap-1 h-auto py-3 glass-morphism border-accent/10">
+              <Heart className="text-accent h-5 w-5" />
+              <span className="text-xs">Top Rated</span>
+            </Button>
+            <Button variant="outline" className="flex flex-col items-center gap-1 h-auto py-3 glass-morphism border-accent/10">
+              <Filter className="text-accent h-5 w-5" />
+              <span className="text-xs">Filters</span>
+            </Button>
+            <Button variant="outline" className="flex flex-col items-center gap-1 h-auto py-3 glass-morphism border-accent/10">
+              <ShoppingCart className="text-accent h-5 w-5" />
+              <span className="text-xs">Cart</span>
+            </Button>
+          </div>
+        </section>
+
         {/* Categories Section */}
-        <section className="animate-in fade-in slide-in-from-left duration-500">
+        <section className={`transition-all duration-500 delay-100 ${isLoaded ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Categories</h2>
             <Button variant="link" className="text-accent">View All</Button>
           </div>
-          <FoodCategoryList />
+          <FoodCategoryList onSelectCategory={handleCategorySelect} selectedCategory={selectedCategory} />
         </section>
 
         {/* Today's Offers */}
-        <section className="animate-in fade-in slide-in-from-right duration-500 delay-150">
+        <section className={`transition-all duration-500 delay-200 ${isLoaded ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Today's Offers</h2>
             <Button variant="link" className="text-accent">View All</Button>
@@ -69,7 +135,7 @@ const Index: React.FC = () => {
         </section>
 
         {/* Popular Items */}
-        <section className="animate-in fade-in slide-in-from-bottom duration-500 delay-300">
+        <section className={`transition-all duration-500 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Popular Items</h2>
             <Button variant="link" className="text-accent">View All</Button>
@@ -82,6 +148,7 @@ const Index: React.FC = () => {
               price={8.99}
               rating={4.8}
               isVegetarian={true}
+              onAddToCart={handleAddToCart}
             />
             <FoodItemCard 
               id="2"
@@ -90,6 +157,7 @@ const Index: React.FC = () => {
               price={12.99}
               rating={4.7}
               isVegetarian={false}
+              onAddToCart={handleAddToCart}
             />
             <FoodItemCard 
               id="3"
@@ -98,6 +166,7 @@ const Index: React.FC = () => {
               price={6.99}
               rating={4.5}
               isVegetarian={true}
+              onAddToCart={handleAddToCart}
             />
             <FoodItemCard 
               id="4"
@@ -106,6 +175,7 @@ const Index: React.FC = () => {
               price={14.99}
               rating={4.6}
               isVegetarian={false}
+              onAddToCart={handleAddToCart}
             />
           </div>
         </section>
@@ -113,19 +183,23 @@ const Index: React.FC = () => {
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 glass-morphism p-2 flex justify-around items-center">
-        <Button variant="ghost" size="icon" className="flex flex-col items-center text-accent">
+        <Button variant="ghost" size="icon" className="flex flex-col items-center text-accent relative group">
+          <div className="absolute -top-2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
           <Home className="h-6 w-6 mb-1" />
           <span className="text-xs">Home</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col items-center">
+        <Button variant="ghost" size="icon" className="flex flex-col items-center relative group">
+          <div className="absolute -top-2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
           <Search className="h-6 w-6 mb-1" />
           <span className="text-xs">Search</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col items-center">
+        <Button variant="ghost" size="icon" className="flex flex-col items-center relative group">
+          <div className="absolute -top-2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
           <Menu className="h-6 w-6 mb-1" />
           <span className="text-xs">Menu</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col items-center">
+        <Button variant="ghost" size="icon" className="flex flex-col items-center relative group">
+          <div className="absolute -top-2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
           <User className="h-6 w-6 mb-1" />
           <span className="text-xs">Profile</span>
         </Button>
