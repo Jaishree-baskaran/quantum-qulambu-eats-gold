@@ -8,7 +8,7 @@ import TodaysOffers from "@/components/TodaysOffers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "@/components/ui/motion";
+import { Motion } from "@/components/ui/motion";
 
 const Index: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,7 +39,7 @@ const Index: React.FC = () => {
     <div className="min-h-screen bg-background text-foreground pb-20">
       <header className="p-4 pt-8 glass-morphism sticky top-0 z-10">
         <div className="flex items-center justify-between mb-4">
-          <motion
+          <Motion
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
@@ -49,7 +49,7 @@ const Index: React.FC = () => {
             <span className="absolute -top-2 -right-4">
               <Badge variant="outline" className="bg-accent/10 text-accent text-xs">Premium</Badge>
             </span>
-          </motion>
+          </Motion>
           
           <Button 
             variant="ghost" 
@@ -58,18 +58,14 @@ const Index: React.FC = () => {
             onClick={() => console.log("Cart clicked")}
           >
             <ShoppingCart className="h-6 w-6" />
-            <motion.span 
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 500, 
-                damping: 15 
-              }}
+            <div 
               className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center"
+              style={{
+                animation: "scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)"
+              }}
             >
               {cartCount}
-            </motion.span>
+            </div>
           </Button>
         </div>
         
@@ -204,6 +200,13 @@ const Index: React.FC = () => {
           <span className="text-xs">Profile</span>
         </Button>
       </nav>
+
+      <style jsx>{`
+        @keyframes scaleIn {
+          0% { transform: scale(0); }
+          100% { transform: scale(1); }
+        }
+      `}</style>
     </div>
   );
 };

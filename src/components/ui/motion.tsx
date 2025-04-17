@@ -27,14 +27,14 @@ interface MotionProps {
   className?: string;
 }
 
-export const motion: React.FC<MotionProps> = ({
+export const Motion = ({
   children,
   initial = {},
   animate = {},
   transition = {},
   className = '',
   ...props
-}) => {
+}: MotionProps) => {
   const [style, setStyle] = useState({
     opacity: initial.opacity ?? 1,
     transform: getTransformString(initial),
@@ -81,4 +81,4 @@ export const motion: React.FC<MotionProps> = ({
   );
 };
 
-export default motion;
+export default Motion;
