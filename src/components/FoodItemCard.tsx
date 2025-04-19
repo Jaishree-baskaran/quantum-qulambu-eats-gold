@@ -90,7 +90,7 @@ const FoodItemCard: React.FC<FoodItemCardProps> = ({
             </div>
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-accent font-semibold">₹{Math.round(price * 80)}</span>
+            <span className="text-accent font-semibold">₹{price}</span>
             <Button
               size="icon"
               className="h-8 w-8 rounded-full bg-accent text-background hover:bg-accent/80 active:bg-accent/60 mt-1 group"

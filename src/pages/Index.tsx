@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from "react";
-import { Search, ShoppingCart, Filter, Home, Menu, User, Clock, Heart } from "lucide-react";
+import { Search, ShoppingCart, Filter, Home, Menu, User, Book, Clock, Heart } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import FoodCategoryList from "@/components/FoodCategoryList";
 import FoodItemCard from "@/components/FoodItemCard";
@@ -8,8 +9,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Motion } from "@/components/ui/motion";
+import { useNavigate } from "react-router-dom";
 
 const Index: React.FC = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [cartCount, setCartCount] = useState(3);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -100,9 +103,13 @@ const Index: React.FC = () => {
               <Heart className="text-accent h-5 w-5" />
               <span className="text-xs">Top Rated</span>
             </Button>
-            <Button variant="outline" className="flex flex-col items-center gap-1 h-auto py-3 glass-morphism border-accent/10">
-              <Filter className="text-accent h-5 w-5" />
-              <span className="text-xs">Filters</span>
+            <Button 
+              variant="outline" 
+              className="flex flex-col items-center gap-1 h-auto py-3 glass-morphism border-accent/10"
+              onClick={() => navigate("/recipes")}
+            >
+              <Book className="text-accent h-5 w-5" />
+              <span className="text-xs">Recipes</span>
             </Button>
             <Button variant="outline" className="flex flex-col items-center gap-1 h-auto py-3 glass-morphism border-accent/10">
               <ShoppingCart className="text-accent h-5 w-5" />
@@ -140,7 +147,7 @@ const Index: React.FC = () => {
               id="1"
               name="Masala Dosa"
               image="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
-              price={8.99}
+              price={200}
               rating={4.8}
               isVegetarian={true}
               onAddToCart={handleAddToCart}
@@ -149,7 +156,7 @@ const Index: React.FC = () => {
               id="2"
               name="Chicken Biryani"
               image="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
-              price={12.99}
+              price={280}
               rating={4.7}
               isVegetarian={false}
               onAddToCart={handleAddToCart}
@@ -158,7 +165,7 @@ const Index: React.FC = () => {
               id="3"
               name="Idli Sambar"
               image="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
-              price={6.99}
+              price={150}
               rating={4.5}
               isVegetarian={true}
               onAddToCart={handleAddToCart}
@@ -167,7 +174,7 @@ const Index: React.FC = () => {
               id="4"
               name="Fish Curry"
               image="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
-              price={14.99}
+              price={320}
               rating={4.6}
               isVegetarian={false}
               onAddToCart={handleAddToCart}
@@ -188,10 +195,15 @@ const Index: React.FC = () => {
           <Search className="h-6 w-6 mb-1" />
           <span className="text-xs">Search</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col items-center relative group">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="flex flex-col items-center relative group"
+          onClick={() => navigate("/recipes")}
+        >
           <div className="absolute -top-2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-          <Menu className="h-6 w-6 mb-1" />
-          <span className="text-xs">Menu</span>
+          <Book className="h-6 w-6 mb-1" />
+          <span className="text-xs">Recipes</span>
         </Button>
         <Button variant="ghost" size="icon" className="flex flex-col items-center relative group">
           <div className="absolute -top-2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
