@@ -34,10 +34,14 @@ const formSchema = z.object({
   path: ["confirmPassword"],
 });
 
-// Initialize Supabase client
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "";
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Initialize Supabase client with proper error handling
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+// Create a dummy client if credentials are missing
+const supabase = (supabaseUrl && supabaseAnonKey) 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -54,6 +58,16 @@ const Signup = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      // Check if Supabase is properly initialized
+      if (!supabase) {
+        toast({
+          variant: "destructive",
+          title: "Configuration Error",
+          description: "Authentication is not properly configured. Please contact support.",
+        });
+        return;
+      }
+
       const { error } = await supabase.auth.signUp({
         email: values.email,
         password: values.password,

@@ -7,6 +7,9 @@ import PopularItems from "@/components/PopularItems";
 import TodaysOffers from "@/components/TodaysOffers";
 import { Button } from "@/components/ui/button";
 
+// Import the FoodCategoryList component which was missing
+import FoodCategoryList from "@/components/FoodCategoryList";
+
 const Index: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [cartCount, setCartCount] = useState(3);
