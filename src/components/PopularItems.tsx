@@ -1,0 +1,60 @@
+
+import React from "react";
+import { Button } from "@/components/ui/button";
+import FoodItemCard from "./FoodItemCard";
+
+interface PopularItemsProps {
+  isLoaded: boolean;
+  onAddToCart: () => void;
+}
+
+const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded, onAddToCart }) => {
+  return (
+    <section className={`transition-all duration-500 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold">Popular Items</h2>
+        <Button variant="link" className="text-accent">View All</Button>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <FoodItemCard 
+          id="1"
+          name="Masala Dosa"
+          image="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
+          price={200}
+          rating={4.8}
+          isVegetarian={true}
+          onAddToCart={onAddToCart}
+        />
+        <FoodItemCard 
+          id="2"
+          name="Chicken Biryani"
+          image="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
+          price={280}
+          rating={4.7}
+          isVegetarian={false}
+          onAddToCart={onAddToCart}
+        />
+        <FoodItemCard 
+          id="3"
+          name="Idli Sambar"
+          image="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
+          price={150}
+          rating={4.5}
+          isVegetarian={true}
+          onAddToCart={onAddToCart}
+        />
+        <FoodItemCard 
+          id="4"
+          name="Fish Curry"
+          image="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
+          price={320}
+          rating={4.6}
+          isVegetarian={false}
+          onAddToCart={onAddToCart}
+        />
+      </div>
+    </section>
+  );
+};
+
+export default PopularItems;
