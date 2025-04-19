@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Search, ShoppingCart, Filter, Home, Menu, User, Clock, Heart } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -201,12 +200,14 @@ const Index: React.FC = () => {
         </Button>
       </nav>
 
-      <style jsx>{`
-        @keyframes scaleIn {
-          0% { transform: scale(0); }
-          100% { transform: scale(1); }
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes scaleIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+          }
+        `}
+      </style>
     </div>
   );
 };
