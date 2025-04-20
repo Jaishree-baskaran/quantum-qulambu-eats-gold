@@ -1,8 +1,9 @@
 
 import React from "react";
-import { Home, Search, Book, User } from "lucide-react";
+import { Home, Search, Book } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import ProfileDialog from "./ProfileDialog";
 
 const BottomNav: React.FC = () => {
   const navigate = useNavigate();
@@ -29,11 +30,7 @@ const BottomNav: React.FC = () => {
         <Book className="h-6 w-6 mb-1" />
         <span className="text-xs">Recipes</span>
       </Button>
-      <Button variant="ghost" size="icon" className="flex flex-col items-center relative group">
-        <div className="absolute -top-2 w-1 h-1 bg-accent rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-        <User className="h-6 w-6 mb-1" />
-        <span className="text-xs">Profile</span>
-      </Button>
+      <ProfileDialog />
     </nav>
   );
 };

@@ -21,7 +21,7 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
         <FoodItemCard 
           id="1"
           name="Masala Dosa"
-          imageUrl="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
+          image="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
           price={200}
           rating={4.8}
           isVegetarian={true}
@@ -31,7 +31,7 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
         <FoodItemCard 
           id="2"
           name="Chicken Biryani"
-          imageUrl="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
+          image="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
           price={280}
           rating={4.7}
           isVegetarian={false}
@@ -41,7 +41,7 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
         <FoodItemCard 
           id="3"
           name="Idli Sambar"
-          imageUrl="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
+          image="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
           price={150}
           rating={4.5}
           isVegetarian={true}
@@ -51,7 +51,7 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
         <FoodItemCard 
           id="4"
           name="Fish Curry"
-          imageUrl="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
+          image="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
           price={320}
           rating={4.6}
           isVegetarian={false}
