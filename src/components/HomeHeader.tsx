@@ -1,12 +1,11 @@
-
 import React from "react";
-import { Search, Filter, ShoppingCart } from "lucide-react";
+import { Search, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Motion } from "@/components/ui/motion";
-import { useCart } from "@/contexts/CartContext";
 import { createClient } from "@supabase/supabase-js";
+import { CartSheet } from "@/components/CartSheet";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder-url.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-anon-key';
@@ -18,7 +17,6 @@ interface HomeHeaderProps {
 }
 
 const HomeHeader: React.FC<HomeHeaderProps> = ({ searchQuery, setSearchQuery }) => {
-  const { totalItems } = useCart();
   const [userEmail, setUserEmail] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -49,24 +47,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ searchQuery, setSearchQuery }) 
             </span>
           )}
         </Motion>
-        
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="relative hover:rotate-12 transition-transform duration-300"
-        >
-          <ShoppingCart className="h-6 w-6" />
-          {totalItems > 0 && (
-            <div 
-              className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center"
-              style={{
-                animation: "scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)"
-              }}
-            >
-              {totalItems}
-            </div>
-          )}
-        </Button>
+        <CartSheet />
       </div>
       
       <div className="relative">

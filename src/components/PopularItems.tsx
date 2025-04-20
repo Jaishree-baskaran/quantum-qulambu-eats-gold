@@ -2,13 +2,15 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import FoodItemCard from "./FoodItemCard";
+import { useCart } from "@/contexts/CartContext";
 
 interface PopularItemsProps {
   isLoaded: boolean;
-  onAddToCart: () => void;
 }
 
-const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded, onAddToCart }) => {
+const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
+  const { addItem } = useCart();
+
   return (
     <section className={`transition-all duration-500 delay-300 ${isLoaded ? 'opacity-100' : 'opacity-0 -translate-y-4'}`}>
       <div className="flex justify-between items-center mb-4">
@@ -19,42 +21,42 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded, onAddToCart }) =>
         <FoodItemCard 
           id="1"
           name="Masala Dosa"
-          image_url="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
+          imageUrl="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
           price={200}
           rating={4.8}
-          is_vegetarian={true}
+          isVegetarian={true}
           category="South Indian"
-          onAddToCart={onAddToCart}
+          onAddToCart={() => addItem({ id: "1", name: "Masala Dosa", price: 200 })}
         />
         <FoodItemCard 
           id="2"
           name="Chicken Biryani"
-          image_url="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
+          imageUrl="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
           price={280}
           rating={4.7}
-          is_vegetarian={false}
+          isVegetarian={false}
           category="Main Course"
-          onAddToCart={onAddToCart}
+          onAddToCart={() => addItem({ id: "2", name: "Chicken Biryani", price: 280 })}
         />
         <FoodItemCard 
           id="3"
           name="Idli Sambar"
-          image_url="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
+          imageUrl="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
           price={150}
           rating={4.5}
-          is_vegetarian={true}
+          isVegetarian={true}
           category="Breakfast"
-          onAddToCart={onAddToCart}
+          onAddToCart={() => addItem({ id: "3", name: "Idli Sambar", price: 150 })}
         />
         <FoodItemCard 
           id="4"
           name="Fish Curry"
-          image_url="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
+          imageUrl="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
           price={320}
           rating={4.6}
-          is_vegetarian={false}
+          isVegetarian={false}
           category="Main Course"
-          onAddToCart={onAddToCart}
+          onAddToCart={() => addItem({ id: "4", name: "Fish Curry", price: 320 })}
         />
       </div>
     </section>
