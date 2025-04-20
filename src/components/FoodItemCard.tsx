@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Heart, Plus, Star, Clock, Info } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,7 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { FoodItem } from "@/types/database.types";
 
-interface FoodItemCardProps extends Partial<FoodItem> {
+interface FoodItemCardProps {
+  id: string;
+  name: string;
+  description?: string;
+  image?: string;
+  price: number;
+  rating: number;
+  is_vegetarian: boolean;
+  category?: string;
   onAddToCart?: () => void;
 }
 
@@ -14,7 +21,7 @@ const FoodItemCard: React.FC<FoodItemCardProps> = ({
   id,
   name,
   description,
-  image_url,
+  image,
   price,
   rating,
   category,
@@ -47,7 +54,7 @@ const FoodItemCard: React.FC<FoodItemCardProps> = ({
     >
       <div className="relative">
         <img
-          src={image_url || `https://via.placeholder.com/400x250?text=${name}`}
+          src={image || `https://via.placeholder.com/400x250?text=${name}`}
           alt={name}
           className={`w-full h-40 object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
         />

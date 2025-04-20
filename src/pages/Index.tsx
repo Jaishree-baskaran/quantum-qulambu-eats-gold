@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import HomeHeader from "@/components/HomeHeader";
 import QuickActions from "@/components/QuickActions";
@@ -6,14 +5,13 @@ import BottomNav from "@/components/BottomNav";
 import PopularItems from "@/components/PopularItems";
 import TodaysOffers from "@/components/TodaysOffers";
 import { Button } from "@/components/ui/button";
-
-// Import the FoodCategoryList component which was missing
 import FoodCategoryList from "@/components/FoodCategoryList";
+import { useCart } from "@/contexts/CartContext";
 
 const Index: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [cartCount, setCartCount] = useState(3);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { addItem } = useCart();
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,8 +21,8 @@ const Index: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleAddToCart = () => {
-    setCartCount(prev => prev + 1);
+  const handleAddToCart = (id: string, name: string, price: number) => {
+    addItem({ id, name, price });
   };
 
   return (
@@ -32,7 +30,6 @@ const Index: React.FC = () => {
       <HomeHeader 
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        cartCount={cartCount}
       />
 
       <main className="px-4 py-6 space-y-8">
@@ -54,7 +51,10 @@ const Index: React.FC = () => {
           <TodaysOffers />
         </section>
 
-        <PopularItems isLoaded={isLoaded} onAddToCart={handleAddToCart} />
+        <PopularItems 
+          isLoaded={isLoaded} 
+          onAddToCart={() => handleAddToCart("1", "Masala Dosa", 200)} 
+        />
       </main>
 
       <BottomNav />

@@ -19,37 +19,41 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded, onAddToCart }) =>
         <FoodItemCard 
           id="1"
           name="Masala Dosa"
-          image="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
+          image_url="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
           price={200}
           rating={4.8}
-          isVegetarian={true}
+          is_vegetarian={true}
+          category="South Indian"
           onAddToCart={onAddToCart}
         />
         <FoodItemCard 
           id="2"
           name="Chicken Biryani"
-          image="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
+          image_url="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
           price={280}
           rating={4.7}
-          isVegetarian={false}
+          is_vegetarian={false}
+          category="Main Course"
           onAddToCart={onAddToCart}
         />
         <FoodItemCard 
           id="3"
           name="Idli Sambar"
-          image="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
+          image_url="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
           price={150}
           rating={4.5}
-          isVegetarian={true}
+          is_vegetarian={true}
+          category="Breakfast"
           onAddToCart={onAddToCart}
         />
         <FoodItemCard 
           id="4"
           name="Fish Curry"
-          image="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
+          image_url="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
           price={320}
           rating={4.6}
-          isVegetarian={false}
+          is_vegetarian={false}
+          category="Main Course"
           onAddToCart={onAddToCart}
         />
       </div>

@@ -5,14 +5,32 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Motion } from "@/components/ui/motion";
+import { useCart } from "@/contexts/CartContext";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder-url.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-anon-key';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 interface HomeHeaderProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  cartCount: number;
 }
 
-const HomeHeader: React.FC<HomeHeaderProps> = ({ searchQuery, setSearchQuery, cartCount }) => {
+const HomeHeader: React.FC<HomeHeaderProps> = ({ searchQuery, setSearchQuery }) => {
+  const { totalItems } = useCart();
+  const [userEmail, setUserEmail] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUserEmail(user.email);
+      }
+    };
+    getUser();
+  }, []);
+
   return (
     <header className="p-4 pt-8 glass-morphism sticky top-0 z-10">
       <div className="flex items-center justify-between mb-4">
@@ -23,26 +41,31 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({ searchQuery, setSearchQuery, ca
           className="text-2xl font-bold text-gradient relative"
         >
           Quantum Qulambu
-          <span className="absolute -top-2 -right-4">
-            <Badge variant="outline" className="bg-accent/10 text-accent text-xs">Premium</Badge>
-          </span>
+          {userEmail && (
+            <span className="absolute -top-2 -right-4">
+              <Badge variant="outline" className="bg-accent/10 text-accent text-xs">
+                {userEmail}
+              </Badge>
+            </span>
+          )}
         </Motion>
         
         <Button 
           variant="ghost" 
           size="icon" 
           className="relative hover:rotate-12 transition-transform duration-300"
-          onClick={() => console.log("Cart clicked")}
         >
           <ShoppingCart className="h-6 w-6" />
-          <div 
-            className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center"
-            style={{
-              animation: "scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)"
-            }}
-          >
-            {cartCount}
-          </div>
+          {totalItems > 0 && (
+            <div 
+              className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center"
+              style={{
+                animation: "scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)"
+              }}
+            >
+              {totalItems}
+            </div>
+          )}
         </Button>
       </div>
       
