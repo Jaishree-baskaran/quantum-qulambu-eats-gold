@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -30,9 +30,9 @@ const formSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-// Initialize Supabase client with proper error handling
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder-url.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-anon-key';
+// Initialize Supabase client
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder-url.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key';
 
 // Create Supabase client
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -40,6 +40,17 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        navigate("/profile");
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -60,7 +71,14 @@ const Login = () => {
         });
         
         // In development with placeholder values, simulate successful login
-        navigate("/");
+        // Store email in localStorage for development purposes
+        localStorage.setItem('userEmail', values.email);
+        toast({
+          title: "Success!",
+          description: "You have been logged in successfully.",
+        });
+        
+        navigate("/profile");
         return;
       }
 
@@ -76,7 +94,7 @@ const Login = () => {
         description: "You have been logged in successfully.",
       });
       
-      navigate("/");
+      navigate("/profile");
     } catch (error: any) {
       toast({
         variant: "destructive",

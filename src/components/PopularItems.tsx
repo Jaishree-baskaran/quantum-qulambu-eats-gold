@@ -24,7 +24,7 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
           image="https://images.unsplash.com/photo-1667030489429-c5fb604556d0"
           price={200}
           rating={4.8}
-          isVegetarian={true}
+          is_vegetarian={true}
           category="South Indian"
           onAddToCart={() => addItem({ id: "1", name: "Masala Dosa", price: 200 })}
         />
@@ -34,7 +34,7 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
           image="https://images.unsplash.com/photo-1589302168068-964664d93dc0"
           price={280}
           rating={4.7}
-          isVegetarian={false}
+          is_vegetarian={false}
           category="Main Course"
           onAddToCart={() => addItem({ id: "2", name: "Chicken Biryani", price: 280 })}
         />
@@ -44,7 +44,7 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
           image="https://images.unsplash.com/photo-1589301760014-d929f3979dbc"
           price={150}
           rating={4.5}
-          isVegetarian={true}
+          is_vegetarian={true}
           category="Breakfast"
           onAddToCart={() => addItem({ id: "3", name: "Idli Sambar", price: 150 })}
         />
@@ -54,7 +54,7 @@ const PopularItems: React.FC<PopularItemsProps> = ({ isLoaded }) => {
           image="https://images.unsplash.com/photo-1626198226928-95cf65427bd8"
           price={320}
           rating={4.6}
-          isVegetarian={false}
+          is_vegetarian={false}
           category="Main Course"
           onAddToCart={() => addItem({ id: "4", name: "Fish Curry", price: 320 })}
         />

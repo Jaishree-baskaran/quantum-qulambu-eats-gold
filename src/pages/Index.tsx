@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import HomeHeader from "@/components/HomeHeader";
 import QuickActions from "@/components/QuickActions";
@@ -11,7 +12,6 @@ import { useCart } from "@/contexts/CartContext";
 const Index: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  const { addItem } = useCart();
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,10 +20,6 @@ const Index: React.FC = () => {
     
     return () => clearTimeout(timer);
   }, []);
-
-  const handleAddToCart = (id: string, name: string, price: number) => {
-    addItem({ id, name, price });
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground pb-20">
@@ -51,10 +47,7 @@ const Index: React.FC = () => {
           <TodaysOffers />
         </section>
 
-        <PopularItems 
-          isLoaded={isLoaded} 
-          onAddToCart={() => handleAddToCart("1", "Masala Dosa", 200)} 
-        />
+        <PopularItems isLoaded={isLoaded} />
       </main>
 
       <BottomNav />

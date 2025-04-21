@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -34,9 +34,9 @@ const formSchema = z.object({
   path: ["confirmPassword"],
 });
 
-// Initialize Supabase client with proper error handling
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder-url.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-anon-key';
+// Initialize Supabase client
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder-url.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key';
 
 // Create Supabase client
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -44,6 +44,17 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 const Signup = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        navigate("/profile");
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,12 +76,15 @@ const Signup = () => {
         });
         
         // In development with placeholder values, simulate successful signup
+        // Store email in localStorage for development purposes
+        localStorage.setItem('userEmail', values.email);
+        
         toast({
           title: "Account created!",
-          description: "In development mode - redirecting to login page.",
+          description: "You have been signed up successfully.",
         });
         
-        navigate("/login");
+        navigate("/profile");
         return;
       }
 
