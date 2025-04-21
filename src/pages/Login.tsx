@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ChevronLeft } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -106,6 +107,18 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
+      <div className="absolute top-4 left-4">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          onClick={() => navigate("/")}
+          className="flex items-center justify-center"
+        >
+          <ChevronLeft className="h-6 w-6" />
+          <span className="sr-only">Go back</span>
+        </Button>
+      </div>
+      
       <Motion
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
